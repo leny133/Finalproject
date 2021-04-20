@@ -15,7 +15,7 @@
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{% url 'index' %}">Network</a>
+            <a class="navbar-brand" href="{% url 'index' %}">Salon Inventory</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,18 +25,18 @@
                 {% if user.is_authenticated %}
                     
                     <li class="nav-item active">
-                        <a class="nav-link" href="http://127.0.0.1:8000/profile/{{user.username}}" name={{user.id}} id="userid">{{ user.username }}
+                        <a class="nav-link" href="#" name={{user.id}} id="userid">{{ user.username }}
                             <span class="sr-only">(current)</span> 
                         </a>
                         <div id="usrnm" class={{user.username}}></div>
                     </li>
                 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
                     </li>
                 
                     <li class="nav-item">
-                        <a class="nav-link" href="/following" id=following>Following</a>
+                        <a class="nav-link" href="#" id=following>My Inventory</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
