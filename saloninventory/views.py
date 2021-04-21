@@ -15,7 +15,7 @@ def index(request):
 
     # Authenticated users view their inbox
     if request.user.is_authenticated:
-        return HttpResponse("You are loggeed in")
+        return render(request, "saloninventory/index.html")
 
     # Everyone else is prompted to sign in
     else:
