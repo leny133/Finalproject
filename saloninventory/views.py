@@ -73,3 +73,8 @@ def login_view(request):
             })
     else:
         return render(request, "saloninventory/login.html")
+
+def Products_api(request):
+    my_products = Products.objects.filter(prodowner= request.user)
+
+    return my_products

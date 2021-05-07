@@ -7,13 +7,13 @@ class User(AbstractUser):
 
 class Products(models.Model):
     prodowner = models.ForeignKey("User", on_delete=models.CASCADE, related_name="prodowner")
-    product_name = models.CharField(max_length=250, relatedname="product_name")
+    product_name = models.CharField(max_length=250)
     totalamount = models.DecimalField(max_digits=10,decimal_places=2)
     measure = models.CharField(max_length=24)
     units = models.DecimalField(max_digits=10, decimal_places=2)
     amountperunit = models.DecimalField(max_digits=10, decimal_places=2)
     unitprice = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.CharField(max_length=250, relatedname="pdescription")
+    description = models.CharField(max_length=250, blank=True)
     image = models.URLField(null=True)
 
     def serialize(self):
@@ -33,7 +33,7 @@ class Services(models.Model):
     servowner = models.ForeignKey("User", on_delete=models.CASCADE, related_name="servowner")
     price = models.DecimalField(max_digits=10, decimal_places=2)
     service_name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, relatedname="sdescription")
+    description = models.CharField(max_length=250, blank=True)
 
     def serialize(self):
         return{
