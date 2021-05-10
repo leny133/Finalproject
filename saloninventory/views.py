@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import User
+from .models import *
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -74,7 +74,14 @@ def login_view(request):
     else:
         return render(request, "saloninventory/login.html")
 
+
+@login_required
 def Products_api(request):
     my_products = Products.objects.filter(prodowner= request.user)
 
-    return my_products
+    return JsonResponse([my_product.serialize() for my_product in my_products], safe=False)
+
+
+@login_required
+def add_product(request):
+    return render(request,"saloninventory/addproduct.html")
