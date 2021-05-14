@@ -84,4 +84,9 @@ def Products_api(request):
 
 @login_required
 def add_product(request):
-    return render(request,"saloninventory/addproduct.html")
+    if request.method == "POST":
+        test = request.POST["productname"]
+        print(test)
+        return render(request, "saloninventory/index.html")
+    else:
+        return render(request,"saloninventory/addproduct.html")
