@@ -85,7 +85,7 @@ def Products_api(request):
 @login_required
 def add_product(request):
     if request.method == "POST":
-        test = request.POST["productname"]
+        test = request.POST["productname"] + request.POST["units"] + request.POST["measurment"] + request.POST["amount"]+request.POST["price"]+request.POST["description"]
         print(test)
         return render(request, "saloninventory/index.html")
     else:
