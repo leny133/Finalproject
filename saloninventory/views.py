@@ -90,3 +90,15 @@ def add_product(request):
         return render(request, "saloninventory/index.html")
     else:
         return render(request,"saloninventory/addproduct.html")
+
+
+@login_required
+def add_service(request):
+    if request.method == "POST":
+        test = request.POST["productname"] + request.POST["units"] + request.POST["measurment"] + \
+            request.POST["amount"]+request.POST["price"] + \
+            request.POST["description"]
+        print(test)
+        return render(request, "saloninventory/index.html")
+    else:
+        return render(request, "saloninventory/services.html")
