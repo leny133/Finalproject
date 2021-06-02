@@ -85,21 +85,20 @@ def Products_api(request):
 @login_required
 def add_product(request):
     if request.method == "POST":
-        print("I got this")
-        data = json.loads(request.body)
-        #product = Products(
-         #   prodowner = request.user,
-          #  product_name = data.get("Product_name"),
-           # totalamount = data.get("Units"),
-            #measure = data.get("Measure_type"),
-            #units = data.get("Units"),
-            #amountperunit = data.get("Amount_per_unit"),
-            #unitprice = data.get("Unit_price"),
-            #description = data.get("Description"),
-            #image = data.get("image")
-        #)
         
-        #product.save()
+        product = Products(
+            prodowner = request.user,
+            product_name = request.POST["productname"],
+            totalamount=request.POST["units"],
+            measure=request.POST["measurement"],
+            units=request.POST["units"],
+            amountperunit=request.POST["amount"],
+            unitprice=request.POST["price"],
+            description=request.POST["description"],
+            image=request.POST["productimage"]
+        )
+        
+        product.save()
         return render(request, "saloninventory/index.html")
     else:
         return render(request,"saloninventory/addproduct.html")
@@ -108,10 +107,13 @@ def add_product(request):
 @login_required
 def add_service(request):
     if request.method == "POST":
-        test = request.POST["productname"] + request.POST["units"] + request.POST["measurment"] + \
-            request.POST["amount"]+request.POST["price"] + \
-            request.POST["description"]
-        print(test)
+        service = Services(
+            servowner = request.user,
+            price = request.POST["servicePrice"],
+            service_name = request.POST["serviceName"],
+            description = request.POST["serviceDescription"]
+        )
+        service.save()
         return render(request, "saloninventory/index.html")
     else:
         return render(request, "saloninventory/services.html")

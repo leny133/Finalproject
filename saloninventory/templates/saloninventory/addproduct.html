@@ -16,7 +16,7 @@
       <div class="form-group" style="text-align: center;">
         <label for="exampleSelect1" >Write how this product is measured. Ex. oz, ml:</label>
         <select style="max-width: 40rem; margin: auto; text-align: center" class="form-select" id="exampleSelect1" 
-          name="measurment" id="measurment" required>
+          name="measurement" id="measurement" required>
             <option>oz</option>
             <option>ml</option>
             <option>grams</option>
@@ -25,7 +25,7 @@
        
       <div class="form-group">
         Amount per unit:<input style="text-align: center; max-width: 40rem; margin: auto;" autofocus
-          class="form-control" id="exampleSelect1" type="number" step=0.01 name="amount" id="amount" placeholder="Amount per unit:" required>
+          class="form-control" type="number" step=0.01 name="amount" id="amount" placeholder="Amount per unit:" required>
       </div>
       <div class="form-group">
         Price per unit:<input style="text-align: center; max-width: 40rem; margin: auto;" autofocus class="form-control"
@@ -37,7 +37,7 @@
       </div>
       <div class="form-group">
         Image Url:<input style="text-align: center; max-width: 40rem; margin: auto;" autofocus class="form-control"
-          type="url"  name="producimage" id="producimage"><br>
+          type="url"  name="productimage" id="productimage"><br>
       </div>
       <input style="text-align: center; max-width: 40rem; margin: auto;" class="btn btn-primary" type="submit"
         value="Add Product">
@@ -45,7 +45,7 @@
       
       
       {% block script %}
-        <script src="{% static 'saloninventory/addproduct.js' %}"></script>
+        
     
     {% endblock %}
 {% endblock %}

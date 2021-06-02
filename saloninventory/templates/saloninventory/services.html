@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% block body %}
-<form style="text-align: center; max-width: 40rem; margin: auto;" action="{% url 'addproduct' %}" method="post">
+<form style="text-align: center; max-width: 40rem; margin: auto;" action="{% url 'addService' %}" method="post">
     {% csrf_token %}
     <div class="form-group">
         Service Name:<input id="serviceName" style="text-align: center; max-width: 40rem; margin: auto;" autofocus class="form-control"
@@ -23,7 +23,7 @@
 
 
     {% block script %}
-        <script src="{% static 'saloninventory/addService.js' %}"></script>
+        <script></script>
 
     {% endblock %}
 {% endblock %}
