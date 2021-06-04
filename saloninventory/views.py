@@ -78,9 +78,17 @@ def login_view(request):
 @login_required
 def Products_api(request):
     my_products = Products.objects.filter(prodowner= request.user)
-
     return JsonResponse([my_product.serialize() for my_product in my_products], safe=False)
 
+@login_required
+def Services_api(request):
+    my_services = Services.objects.filter(servowner=request.user)
+    return JsonResponse([my_service.serialize() for my_service in my_services], safe=False)
+
+@login_required
+def Sales_api(request):
+    my_sales = Sale.objects.filter(sales_person=request.user)
+    return JsonResponse([my_sale.serialize() for my_sale in my_sales], safe=False)
 
 @login_required
 def add_product(request):
@@ -104,6 +112,8 @@ def add_product(request):
         return render(request,"saloninventory/addproduct.html")
 
 
+
+
 @login_required
 def add_service(request):
     if request.method == "POST":
@@ -117,3 +127,23 @@ def add_service(request):
         return render(request, "saloninventory/index.html")
     else:
         return render(request, "saloninventory/services.html")
+
+
+@login_required
+def newSale (request):
+    if request.method == "POST":
+        sale = Sale(
+            sales_person=request.user,
+            total=request.POST["total"],
+            sold_products=request.POST["products"],
+            sold_services=request.POST["services"],
+            sold_other = request.POST["other"],
+        )
+        #sale.save()
+        print(sale)
+        return render(request, "saloninventory/index.html")
+    else:
+        return render(request, "saloninventory/newsale.html")
+
+
+

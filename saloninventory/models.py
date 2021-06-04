@@ -40,7 +40,7 @@ class Services(models.Model):
             "Service_id": self.id,
             "Service_name": self.service_name,
             "Service_price": self.price,
-            "Service_description": self.description
+            "Service_description": self.description,
         }
 
 class Sale(models.Model):

@@ -1,0 +1,54 @@
+{% extends "saloninventory/layout.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block body %}
+<form style="text-align: center; max-width: 40rem; margin: auto;" onsubmit="add_product()" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        Product Name:<input style="text-align: center; max-width: 40rem; margin: auto;" autofocus class="form-control"
+            type="text" name="productname" id="productname" placeholder="Product Name" required>
+    </div>
+    <div class="form-group">
+        How many units of this product:<input style="text-align: center; max-width: 40rem; margin: auto;" autofocus
+            class="form-control" type="number" step=0.01 name="units" id="units" placeholder="Units amount" required>
+    </div>
+    <div class="form-group" style="text-align: center;">
+        <label for="exampleSelect1">Write how this product is measured. Ex. oz, ml:</label>
+        <select style="max-width: 40rem; margin: auto; text-align: center" class="form-select" id="exampleSelect1"
+            name="measurement" id="measurement" required>
+            <option>oz</option>
+            <option>ml</option>
+            <option>grams</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        Amount per unit:<input style="text-align: center; max-width: 40rem; margin: auto;" autofocus
+            class="form-control" type="number" step=0.01 name="amount" id="amount" placeholder="Amount per unit:"
+            required>
+    </div>
+    <div class="form-group">
+        Price per unit:<input style="text-align: center; max-width: 40rem; margin: auto;" autofocus class="form-control"
+            type="number" min="0" step="0.01" name="price" id="price" required>
+    </div>
+    <div class="form-group">
+        Description:<textarea style="text-align: center; max-width: 40rem; margin: auto;" autofocus class="form-control"
+            type="text" name="description" id="description" placeholder="Description:" required></textarea>
+    </div>
+    <div class="form-group">
+        Image Url:<input style="text-align: center; max-width: 40rem; margin: auto;" autofocus class="form-control"
+            type="url" name="productimage" id="productimage"><br>
+    </div>
+    <input style="text-align: center; max-width: 40rem; margin: auto;" class="btn btn-primary" type="submit"
+        value="Add Product">
+</form>
+
+
+{% block script %}
+
+
+{% endblock %}
+{% endblock %}
+
+</html>
