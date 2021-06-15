@@ -8,7 +8,8 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
     path("addproduct", views.add_product, name="addproduct"),
-    path("addService", views.add_service, name="addService"), 
+    path("addService", views.add_service, name="addService"),
+    path("newsale",views.newSale, name="newSale"), 
     
     #API
     path("myproducts", views.Products_api, name = "products_api"),

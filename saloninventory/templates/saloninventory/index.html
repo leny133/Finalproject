@@ -1,15 +1,14 @@
-{% extends "saloninventory/layout.html" %}
-{% load static %}
+{% extends "saloninventory/layout.html" %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% block body %}
+  {% block body %}
 
-    <h2 style="text-align: center;">{{ request.user.email }}</h2>
-    
-    
+  <h2 style="text-align: center">{{ request.user.email }}</h2>
 
-    {% block script %}
-        
-    {% endblock %}
-{% endblock %}
+  {% block script %}
+  <script
+    type="text/javascript"
+    src="{% static 'saloninventory/index.js' %}"
+  ></script>
+  {% endblock %} {% endblock %}
 </html>
