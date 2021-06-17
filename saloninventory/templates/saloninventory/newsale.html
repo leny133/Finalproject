@@ -2,8 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
   {% block body %}
-  <div id="cartproduct-view">1</div>
-  <div id="cartservice-view">2</div>
+  <button id="showproduct">Add Product</button>
+  <button id="showservice">Add Service</button>
+  <div id="cartproduct-view" style="display: none;">
+    
+    <label for="products">Select a product:</label>
+    <select name="products" id="products"></select>
+  </div>
+  <div id="cartservice-view" style="display: none;">
+    <label for="services">Select a service:</label>
+    <select name="services" id="services"></select>
+  </div>
   <div id="cartList">3</div>
 
   {% block script %}
