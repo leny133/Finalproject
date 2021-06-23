@@ -25,11 +25,10 @@ function load_products_services() {
       .then((response) => response.json())
       .then((myservices) => {
         allservices = myservices;
-        console.log(myservices)
         for (service in myservices) {
           var y = document.createElement("option");
           y.setAttribute("value", `${myservices[service].Service_name}`);
-          y.innerHTML = `${myservices[service].Service_name}`;
+          y.innerHTML =`${myservices[service].Service_name}`;
           document.querySelector("#services").append(y);
         }
       });
@@ -38,7 +37,7 @@ function load_products_services() {
 function showproduct() {
   document.querySelector("#cartproduct-view").style.display = "block";
   document.querySelector("#cartservice-view").style.display = "none";
-  console.log(allproducts);
+  
 }
 function showservice() {
   document.querySelector("#cartproduct-view").style.display = "none";
