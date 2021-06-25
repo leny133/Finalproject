@@ -67,7 +67,10 @@ function showservice() {
   document.querySelector("#cartservice-view").style.display = "block";
 }
 function addToCartP() {
-  const prodAdd =document.querySelector("#products").value 
   
+  fetch_products().then((Products) => {
+    const prodAdd =document.querySelector("#products").value 
+    
+  });
 }
 function addToCartS() {}
