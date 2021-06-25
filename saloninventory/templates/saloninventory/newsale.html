@@ -8,12 +8,17 @@
     
     <label for="products">Select a product:</label>
     <select name="products" id="products"></select>
+    <button id="productCart">Add To Cart</button>
   </div>
   <div id="cartservice-view" style="display: none;">
     <label for="services">Select a service:</label>
     <select name="services" id="services"></select>
+    <button id="serviceCart">Add To Cart</button>
   </div>
-  <div id="cartList">3</div>
+  <div id="cartList">
+    <table id="Ptable"></table>
+    <table id="Stable"></table>
+  </div>
 
   {% block script %}
   <script
