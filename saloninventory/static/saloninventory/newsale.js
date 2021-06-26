@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#showservice")
     .addEventListener("click", () => showservice());
-  
+  document
+    .querySelector("#productCart")
+    .addEventListener("click", () => addToCartP());
   document
     .querySelector("#serviceCart")
     .addEventListener("click", () => addToCartS());
@@ -17,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   fetch_services().then((services) => {
     load_services(services);
+    console.log(cartP)
   });
 });
 
@@ -47,7 +50,7 @@ function load_products(Products) {
     y.setAttribute("value", `${Products[product].id}`);
     y.setAttribute("id",`p${Products[product].id}`)
     y.setAttribute("name",`${Products[product].Product_name}`)
-    y.setAttribute("price", `${Products[product].Unit_price/Products[product].Amount_per_unit}`);
+    y.setAttribute("price", `${(Products[product].Unit_price/Products[product].Amount_per_unit).toFixed(2)}`);
     y.innerHTML = `${Products[product].Product_name}(${Products[product].Measure_type}) `;
     document.querySelector("#products").append(y);
   }
@@ -77,17 +80,18 @@ function addToCartP() {
     const prodPrice =document.getElementById(`p${prodId}`).getAttribute('price')
     const prodAmount = document.getElementById("productAmount").value
     const prodName = document.getElementById(`p${prodId}`).getAttribute('name')
-    const tPSale = prodPrice*prodAmount;
-    var y = document.createElement("table")
+    const tPSale = (prodPrice*prodAmount).toFixed(2);
+    cartP.push(prodId,prodName,prodPrice,prodAmount)
+    var y = document.createElement("tr")
     y.innerHTML = `
-    <tr>
+    
             <td>${prodName} </td>
-            <td> ${prodPrice} </td>
+            <td> $${prodPrice} </td>
             <td> ${prodAmount}</td>
-            <td> ${tPSale}</td>
-    </tr>
+            <td> $${tPSale}</td>
+    
           `   
-    document.getElementById("cartList").append(y)
+    document.getElementById("Cart").append(y)
     console.log(prodId)
     console.log(tPSale, prodAmount) 
     
