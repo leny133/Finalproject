@@ -5,10 +5,22 @@
   <button id="showproduct">Add Product</button>
   <button id="showservice">Add Service</button>
   <div id="cartproduct-view" style="display: none;">
-    
+    <form
+    style="text-align: center; max-width: 40rem; margin: auto"
+    onsubmit="addToCartP()">
     <label for="products">Select a product:</label>
-    <select name="products" id="products"></select>
-    <button id="productCart">Add To Cart</button>
+    <select name="products" id="products"></select><br>
+    <lable for="productAmount" style="text-align: center; margin: auto">Amount of oz or ml</lable>
+    <input
+      style="text-align: center; max-width: 40rem; margin: auto"
+      autofocus
+      required
+      class="form-control"
+      type="number"
+      id="productAmount"      
+    /><br>
+    <input class="btn btn-primary" type="submit" value="Add to cart" />
+    </form>
   </div>
   <div id="cartservice-view" style="display: none;">
     <label for="services">Select a service:</label>
@@ -19,10 +31,12 @@
     <table id="Cart">
       <tr>
             <th>Product or Service</th>
-            <th>Price</th>
+            <th>Price per oz/ml</th>
+            <th>Amount oz/ml</th>
+            <th>This Sale</th>
       </tr>
     </table>
-    <table>
+    <table id="Added">
           
           <tr>
             <td>Green Plantains </td>
