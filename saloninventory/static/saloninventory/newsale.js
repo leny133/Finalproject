@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch_services().then((services) => {
     load_services(services);
     console.log(cartP)
+    
   });
 });
 
@@ -81,7 +82,7 @@ function addToCartP() {
     const prodAmount = document.getElementById("productAmount").value
     const prodName = document.getElementById(`p${prodId}`).getAttribute('name')
     const tPSale = (prodPrice*prodAmount).toFixed(2);
-    cartP.push(prodId,prodName,prodPrice,prodAmount)
+    cartP.push({pid:prodId,Product_Name:prodName,Price:prodPrice,Amount:prodAmount})
     var y = document.createElement("tr")
     y.innerHTML = `
     
@@ -92,9 +93,8 @@ function addToCartP() {
     
           `   
     document.getElementById("Cart").append(y)
-    console.log(prodId)
-    console.log(tPSale, prodAmount) 
+    
     
   
 }
-function addToCartS() {}
+function addToCartS() {console.log(cartP[0].Price)}
