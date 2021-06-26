@@ -1,4 +1,4 @@
-let cartP = [];
+var cartP = sessionStorage.getItem("cartproducts");
 let cartS = [];
 document.addEventListener("DOMContentLoaded", function () {
   document
@@ -13,14 +13,15 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#serviceCart")
     .addEventListener("click", () => addToCartS());
+  var ctp = sessionStorage.getItem("cartproducts");
+  
+  console.log(cartP)
   
   fetch_products().then((Products) => {
     load_products(Products);
   });
   fetch_services().then((services) => {
     load_services(services);
-    console.log(cartP)
-    
   });
 });
 
@@ -82,7 +83,22 @@ function addToCartP() {
     const prodAmount = document.getElementById("productAmount").value
     const prodName = document.getElementById(`p${prodId}`).getAttribute('name')
     const tPSale = (prodPrice*prodAmount).toFixed(2);
-    cartP.push({pid:prodId,Product_Name:prodName,Price:prodPrice,Amount:prodAmount})
+    var cartproducts = {
+      pid:prodId,
+      Product_Name:prodName,
+      Price:prodPrice,
+      Amount:prodAmount
+    };
+    if (cartP == null){
+      cartP = [];
+      cartP.push(cartproducts)
+    }else{
+      cartP = {cartP,cartproducts};
+    }
+    
+    var jsonStr = JSON.stringify(cartP);
+    //
+    sessionStorage.setItem("cartproducts",jsonStr)
     var y = document.createElement("tr")
     y.innerHTML = `
     
@@ -97,4 +113,4 @@ function addToCartP() {
     
   
 }
-function addToCartS() {console.log(cartP[0].Price)}
+function addToCartS() {sessionStorage.clear()}
