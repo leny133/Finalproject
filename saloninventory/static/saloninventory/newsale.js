@@ -13,9 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#serviceCart")
     .addEventListener("click", () => addToCartS());
-  var ctp = sessionStorage.getItem("cartproducts");
-  
-  console.log(cartP)
+  document
+    .querySelector("#emptycart")
+    .addEventListener("click", () => {sessionStorage.clear(); location.href ="/"; });
+  document.querySelector("#Cart").style.display = "none";
+  document.querySelector("#emptycart").style.display = "none";
+  cartP = JSON.parse(cartP);
+  console.log(cartP);
+  if(cartP!=null){
+    loadCart();
+    document.querySelector("#Cart").style.display = "block";
+    document.querySelector("#emptycart").style.display = "block";
+  }
   
   fetch_products().then((Products) => {
     load_products(Products);
@@ -23,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch_services().then((services) => {
     load_services(services);
   });
+
 });
 
 async function fetch_products() {
@@ -32,7 +42,7 @@ async function fetch_products() {
     throw new Error(message);
   }
   Products = await response.json();
-  console.log(Products)
+  console.log(Products);
   return Products;
 }
 async function fetch_services() {
@@ -83,34 +93,47 @@ function addToCartP() {
     const prodAmount = document.getElementById("productAmount").value
     const prodName = document.getElementById(`p${prodId}`).getAttribute('name')
     const tPSale = (prodPrice*prodAmount).toFixed(2);
+    var itemcount = sessionStorage.getItem("itemcount");
     var cartproducts = {
       pid:prodId,
       Product_Name:prodName,
       Price:prodPrice,
       Amount:prodAmount
     };
+    
     if (cartP == null){
       cartP = [];
-      cartP.push(cartproducts)
+      itemcount=0;
+      
     }else{
-      cartP = {cartP,cartproducts};
+
+      itemcount=parseInt(itemcount)+1;
+      
     }
     
+    console.log(itemcount)
+    console.log(cartproducts)
+    cartP[itemcount]=cartproducts;
+    console.log(cartP);
     var jsonStr = JSON.stringify(cartP);
-    //
+    sessionStorage.setItem("itemcount",itemcount)
     sessionStorage.setItem("cartproducts",jsonStr)
-    var y = document.createElement("tr")
-    y.innerHTML = `
-    
-            <td>${prodName} </td>
-            <td> $${prodPrice} </td>
-            <td> ${prodAmount}</td>
-            <td> $${tPSale}</td>
-    
-          `   
-    document.getElementById("Cart").append(y)
-    
-    
-  
+    location.href = "/newSale";
 }
-function addToCartS() {sessionStorage.clear()}
+function addToCartS() {};
+function loadCart(){
+  
+  for(i=0;i<cartP.length;i++){
+   var y = document.createElement("tr"); 
+   y.innerHTML = `
+    
+            <td>${cartP[i].Product_Name} </td>
+            <td> $${cartP[i].Price} </td>
+            <td> ${cartP[i].Amount}</td>
+            <td> $${cartP[i].Price*cartP[i].Amount}</td>
+    
+          `;
+  document.getElementById("Cart").append(y); 
+  }
+  
+};
