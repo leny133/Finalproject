@@ -1,4 +1,5 @@
-var cartP = sessionStorage.getItem("cartproducts");
+var usr = document.querySelector("#userid").name;
+var cartP = sessionStorage.getItem(`${usr}cartproducts`);
 let cartS = [];
 document.addEventListener("DOMContentLoaded", function () {
   document
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#Cart").style.display = "none";
   document.querySelector("#emptycart").style.display = "none";
   cartP = JSON.parse(cartP);
-  console.log(cartP);
+  console.log(document.querySelector("#userid").name);
   if(cartP!=null){
     loadCart();
     document.querySelector("#Cart").style.display = "block";
@@ -93,7 +94,7 @@ function addToCartP() {
     const prodAmount = document.getElementById("productAmount").value
     const prodName = document.getElementById(`p${prodId}`).getAttribute('name')
     const tPSale = (prodPrice*prodAmount).toFixed(2);
-    var itemcount = sessionStorage.getItem("itemcount");
+    var itemcount = sessionStorage.getItem(`${usr}itemcount`);
     var cartproducts = {
       pid:prodId,
       Product_Name:prodName,
@@ -116,8 +117,9 @@ function addToCartP() {
     cartP[itemcount]=cartproducts;
     console.log(cartP);
     var jsonStr = JSON.stringify(cartP);
-    sessionStorage.setItem("itemcount",itemcount)
-    sessionStorage.setItem("cartproducts",jsonStr)
+    
+    sessionStorage.setItem(`${usr}itemcount`,itemcount)
+    sessionStorage.setItem(`${usr}cartproducts`,jsonStr)
     location.href = "/newSale";
 }
 function addToCartS() {};
