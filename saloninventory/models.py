@@ -57,7 +57,7 @@ class Sale(models.Model):
         "Products", blank=True, related_name="sold_products")
     sold_services = models.ManyToManyField(
         "Services", blank=True, related_name="sold_services")
-    sold_other = models.DecimalField(max_digits=10, decimal_places=2)
+    sale_html = models.CharField(max_length=2000, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def serialize(self):
@@ -66,6 +66,6 @@ class Sale(models.Model):
             "Sales_person": self.sales_person,
             "Sold_products": [Products.id for Products in self.sold_products.all()],
             "Sold_services": [Services.id for Services in self.sold_services.all()],
-            "Sold_other": self.sold_other,
+            "Sold_html": self.sale_html,
             "Sale_date": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
         }

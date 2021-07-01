@@ -130,18 +130,20 @@ def add_service(request):
         return render(request, "saloninventory/services.html")
 
 
+@csrf_exempt
 @login_required
 def newSale(request):
     if request.method == "POST":
-        sale = Sale(
-            sales_person=request.user,
-            total=request.POST["total"],
-            sold_products=request.POST["products"],
-            sold_services=request.POST["services"],
-            sold_other=request.POST["other"],
-        )
+        #sale = Sale(
+        #    sales_person=request.user,
+        #    total=request.POST["total"],
+        #    sold_products=request.POST["products"],
+        #    sold_services=request.POST["services"],
+        #    sale_html=request.POST["other"],
+        #)
         # sale.save()
-        print(sale)
+        sale = json.loads(request.body) 
+        print(sale[0].get("type"))
         return render(request, "saloninventory/index.html")
     else:
         return render(request, "saloninventory/newsale.html")

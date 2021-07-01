@@ -1,6 +1,6 @@
 var usr = document.querySelector("#userid").name;
 var cartP = sessionStorage.getItem(`${usr}cartproducts`);
-let cartS = [];
+var tbl_html = "";
 document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#showproduct")
@@ -18,14 +18,24 @@ document.addEventListener("DOMContentLoaded", function () {
     sessionStorage.clear();
     location.href = "/";
   });
+  document.querySelector("#placeOrder").addEventListener("click", () => {
+    var r = confirm("Place Order?");
+    if (r == true) {
+      place_order();
+    } else {
+      location.href = "/newsale";
+    }
+    
+  });
   document.querySelector("#Cart").style.display = "none";
   document.querySelector("#emptycart").style.display = "none";
+  document.querySelector("#placeOrder").style.display = "none";
   cartP = JSON.parse(cartP);
-  console.log(document.querySelector("#userid").name);
   if (cartP != null) {
     loadCart();
     document.querySelector("#Cart").style.display = "block";
-    document.querySelector("#emptycart").style.display = "block";
+    document.querySelector("#emptycart").style.display = "inline";
+    document.querySelector("#placeOrder").style.display = "inline";
   }
 
   fetch_products().then((Products) => {
@@ -36,14 +46,27 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+async function place_order() {
+  const response = await fetch("/newsale", {
+  method: 'POST',
+  body: JSON.stringify(cartP) 
+});
+  if (!response.ok) {
+    const message = `An error has occured: ${response.status}`;
+    alert(message);
+    throw new Error(message);
+  }
+  
+  return (location.href = "/");
+}
 async function fetch_products() {
   const response = await fetch("/myproducts");
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
+    alert(message)
     throw new Error(message);
   }
   Products = await response.json();
-  console.log(Products);
   return Products;
 }
 async function fetch_services() {
@@ -53,7 +76,6 @@ async function fetch_services() {
     throw new Error(message);
   }
   services = await response.json();
-  console.log(services);
   return services;
 }
 
@@ -101,7 +123,7 @@ function addToCartP() {
   const tPSale = (prodPrice * prodAmount).toFixed(2);
   var itemcount = sessionStorage.getItem(`${usr}itemcount`);
   var cartproducts = {
-    type:"product",
+    type: "product",
     pid: prodId,
     Product_Name: prodName,
     Price: prodPrice,
@@ -134,7 +156,7 @@ function addToCartS() {
   const tPSale = (prodPrice * prodAmount).toFixed(2);
   var itemcount = sessionStorage.getItem(`${usr}itemcount`);
   var cartproducts = {
-    type:"service",
+    type: "service",
     pid: prodId,
     Product_Name: prodName,
     Price: prodPrice,
@@ -149,7 +171,6 @@ function addToCartS() {
     itemcount = parseInt(itemcount) + 1;
   }
 
-  console.log(itemcount);
   console.log(cartproducts);
   cartP[itemcount] = cartproducts;
   console.log(cartP);
@@ -161,23 +182,27 @@ function addToCartS() {
 }
 function loadCart() {
   var total_sale = 0;
-  console.log(cartP)
-  const isEmpty = Object.values(cartP).every(x => x === null)
-  console.log(isEmpty)
+  console.log(cartP);
+  const isEmpty = Object.values(cartP).every((x) => x === null);
+  console.log(isEmpty);
   for (i = 0; i < cartP.length; i++) {
-    if(isEmpty===true){sessionStorage.clear();
-      location.href = "/newSale";}else{
-      if(cartP[i]== undefined){
-      
-    }else{
-    var y = document.createElement("tr");
-    y.innerHTML = `
-    
+    if (isEmpty === true) {
+      sessionStorage.clear();
+      location.href = "/newSale";
+    } else {
+      if (cartP[i] == undefined) {
+      } else {
+        var tbl = "";
+        var y = document.createElement("tr");
+        tbl = `
             <td>${cartP[i].Product_Name} </td>
             <td> $${cartP[i].Price} </td>
             <td> ${cartP[i].Amount}</td>
             <td> $${(cartP[i].Price * cartP[i].Amount).toFixed(2)}</td>
-            <td> <button id="ed${cartP[i].pid}" name="${cartP[i].pid}"
+            `;
+        y.innerHTML =
+          tbl +
+          `<td> <button id="ed${cartP[i].pid}" name="${cartP[i].pid}"
              onclick="edit(${i},)">
             Edit
             </button></td>
@@ -186,34 +211,42 @@ function loadCart() {
             Remove
             </button></td>
           `;
-    document.getElementById("Cart").append(y);
-    total_sale = parseFloat(cartP[i].Sale) + total_sale;
-  }}}
+        document.getElementById("Cart").append(y);
+        tbl_html = tbl_html + tbl;
+        total_sale = parseFloat(cartP[i].Sale) + total_sale;
+      }
+    }
+  }
   y = document.createElement("tr");
-  y.innerHTML = `
+  tbl = `
     
             <td> </td>
             <td> </td>
             <td> Total: </td>
-            <td> $${total_sale.toFixed(2)}</td>
+            <td id="total" name="${total_sale.toFixed(
+              2
+            )}"> $${total_sale.toFixed(2)}</td>
     
           `;
+  y.innerHTML = tbl;
+  tbl_html = tbl_html + tbl;
   document.getElementById("Cart").append(y);
+  console.log(tbl_html);
 }
-function edit(prod_id){
+function edit(prod_id) {
   var x = parseFloat(prompt("Enter price change", "0"));
   const isInteger = /^[0-9.,]+$/;
-if(isInteger.test(x)) {
-  cartP[prod_id].Price = x;
-  var jsonStr = JSON.stringify(cartP);
-  sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
-  location.href = "/newSale";
-}else{
-  edit(prod_id)
+  if (isInteger.test(x)) {
+    cartP[prod_id].Price = x;
+    var jsonStr = JSON.stringify(cartP);
+    sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
+    location.href = "/newSale";
+  } else {
+    edit(prod_id);
+  }
 }
-}
-function delete_entry(prod_id){
-  delete cartP[prod_id]
+function delete_entry(prod_id) {
+  delete cartP[prod_id];
   var jsonStr = JSON.stringify(cartP);
   sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
   location.href = "/newSale";
