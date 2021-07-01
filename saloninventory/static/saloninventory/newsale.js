@@ -101,6 +101,7 @@ function addToCartP() {
   const tPSale = (prodPrice * prodAmount).toFixed(2);
   var itemcount = sessionStorage.getItem(`${usr}itemcount`);
   var cartproducts = {
+    type:"product",
     pid: prodId,
     Product_Name: prodName,
     Price: prodPrice,
@@ -133,6 +134,7 @@ function addToCartS() {
   const tPSale = (prodPrice * prodAmount).toFixed(2);
   var itemcount = sessionStorage.getItem(`${usr}itemcount`);
   var cartproducts = {
+    type:"service",
     pid: prodId,
     Product_Name: prodName,
     Price: prodPrice,
@@ -159,7 +161,15 @@ function addToCartS() {
 }
 function loadCart() {
   var total_sale = 0;
+  console.log(cartP)
+  const isEmpty = Object.values(cartP).every(x => x === null)
+  console.log(isEmpty)
   for (i = 0; i < cartP.length; i++) {
+    if(isEmpty===true){sessionStorage.clear();
+      location.href = "/newSale";}else{
+      if(cartP[i]== undefined){
+      
+    }else{
     var y = document.createElement("tr");
     y.innerHTML = `
     
@@ -168,20 +178,24 @@ function loadCart() {
             <td> ${cartP[i].Amount}</td>
             <td> $${(cartP[i].Price * cartP[i].Amount).toFixed(2)}</td>
             <td> <button id="ed${cartP[i].pid}" name="${cartP[i].pid}"
-             onclick="edit(${cartP[i].pid},)">
+             onclick="edit(${i},)">
             Edit
+            </button></td>
+            <td> <button id="del${cartP[i].pid}" name="${cartP[i].pid}" class="btn btn-danger"
+             onclick="delete_entry(${i})">
+            Remove
             </button></td>
           `;
     document.getElementById("Cart").append(y);
     total_sale = parseFloat(cartP[i].Sale) + total_sale;
-  }
+  }}}
   y = document.createElement("tr");
   y.innerHTML = `
     
             <td> </td>
             <td> </td>
             <td> Total: </td>
-            <td> $${total_sale}</td>
+            <td> $${total_sale.toFixed(2)}</td>
     
           `;
   document.getElementById("Cart").append(y);
@@ -190,8 +204,17 @@ function edit(prod_id){
   var x = parseFloat(prompt("Enter price change", "0"));
   const isInteger = /^[0-9.,]+$/;
 if(isInteger.test(x)) {
-  
+  cartP[prod_id].Price = x;
+  var jsonStr = JSON.stringify(cartP);
+  sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
+  location.href = "/newSale";
 }else{
   edit(prod_id)
 }
+}
+function delete_entry(prod_id){
+  delete cartP[prod_id]
+  var jsonStr = JSON.stringify(cartP);
+  sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
+  location.href = "/newSale";
 }
