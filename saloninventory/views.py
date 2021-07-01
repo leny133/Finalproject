@@ -143,7 +143,7 @@ def newSale(request):
         #)
         # sale.save()
         sale = json.loads(request.body) 
-        print(sale[0].get("type"))
+        print(sale[0][0].get("tbl_html")) 
         return render(request, "saloninventory/index.html")
     else:
         return render(request, "saloninventory/newsale.html")

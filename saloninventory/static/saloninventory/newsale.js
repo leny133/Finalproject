@@ -47,10 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function place_order() {
+  const body = JSON.stringify(cartP)+JSON.stringify({tbl_html:tbl_html});
   const response = await fetch("/newsale", {
-  method: 'POST',
-  body: JSON.stringify(cartP) 
-});
+    method: "POST",
+    body: JSON.stringify(body),
+          
+  });
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     alert(message);
