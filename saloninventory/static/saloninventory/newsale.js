@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function place_order() {
-  const body = JSON.stringify(cartP)+JSON.stringify({tbl_html:tbl_html});
+  const body = [{"cartP":JSON.stringify(cartP),
+                  "tbl_html":tbl_html}];
   const response = await fetch("/newsale", {
     method: "POST",
     body: JSON.stringify(body),
@@ -58,7 +59,7 @@ async function place_order() {
     alert(message);
     throw new Error(message);
   }
-  
+  sessionStorage.clear();
   return (location.href = "/");
 }
 async function fetch_products() {
@@ -225,9 +226,8 @@ function loadCart() {
             <td> </td>
             <td> </td>
             <td> Total: </td>
-            <td id="total" name="${total_sale.toFixed(
-              2
-            )}"> $${total_sale.toFixed(2)}</td>
+            <td id="total" name="${total_sale.toFixed(2 )}">
+             $${total_sale.toFixed(2)}</td>
     
           `;
   y.innerHTML = tbl;
@@ -240,6 +240,7 @@ function edit(prod_id) {
   const isInteger = /^[0-9.,]+$/;
   if (isInteger.test(x)) {
     cartP[prod_id].Price = x;
+    cartP[prod_id].Sale = cartP[prod_id].Amount * x;
     var jsonStr = JSON.stringify(cartP);
     sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
     location.href = "/newSale";

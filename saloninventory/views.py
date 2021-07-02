@@ -134,16 +134,28 @@ def add_service(request):
 @login_required
 def newSale(request):
     if request.method == "POST":
-        #sale = Sale(
-        #    sales_person=request.user,
-        #    total=request.POST["total"],
-        #    sold_products=request.POST["products"],
-        #    sold_services=request.POST["services"],
-        #    sale_html=request.POST["other"],
-        #)
-        # sale.save()
-        sale = json.loads(request.body) 
-        print(sale[0][0].get("tbl_html")) 
+        sale = json.loads(request.body)
+        cartP =json.loads(sale[0].get("cartP") )
+        tbl_html = sale[0].get("tbl_html")
+        total_S = 0.00
+        for p in cartP:
+            if p != None:
+                total_S = total_S + float(p.get("Sale"))
+        print(total_S)
+        endsale = Sale.objects.create(
+                sales_person=request.user,
+                total=total_S,
+                sale_html=tbl_html,
+                )
+        for p in cartP :
+            if p != None:
+                if p.get("type")== "product":
+                    endsale.sold_products.add(int(p.get("pid")))
+                elif p.get("type")== "service":
+                    endsale.sold_services.add(int(p.get("pid")))
+                    
+                
+            
         return render(request, "saloninventory/index.html")
     else:
         return render(request, "saloninventory/newsale.html")
