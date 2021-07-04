@@ -89,7 +89,7 @@ def Services_api(request):
 
 @login_required
 def Sales_api(request):
-    my_sales = Sale.objects.filter(sales_person=request.user)
+    my_sales = Sale.objects.filter(sales_person=request.user) 
     return JsonResponse([my_sale.serialize() for my_sale in my_sales], safe=False)
 
 
