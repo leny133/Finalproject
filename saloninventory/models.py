@@ -63,7 +63,6 @@ class Sale(models.Model):
     def serialize(self):
         return{
             "Sale_id": self.id,
-            "Sales_person": self.sales_person,
             "Sold_products": [Products.id for Products in self.sold_products.all()],
             "Sold_services": [Services.id for Services in self.sold_services.all()],
             "Sold_html": self.sale_html,
