@@ -65,6 +65,8 @@ class Sale(models.Model):
             "Sale_id": self.id,
             "Sold_products": [Products.id for Products in self.sold_products.all()],
             "Sold_services": [Services.id for Services in self.sold_services.all()],
-            "Sold_html": self.sale_html,
             "Sale_date": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
+            "Total":self.total,
+            "Sold_html": self.sale_html,
+            
         }
