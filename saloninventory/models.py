@@ -63,8 +63,9 @@ class Sale(models.Model):
     def serialize(self):
         return{
             "Sale_id": self.id,
-            "Sold_products": [Products.id for Products in self.sold_products.all()],
-            "Sold_services": [Services.id for Services in self.sold_services.all()],
+            "Sold_products": [{"prodName":Products.product_name,
+                               "prodImage": Products.image} for Products in self.sold_products.all()],
+            "Sold_services": [Services.service_name for Services in self.sold_services.all()],
             "Sale_date": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
             "Total":self.total,
             "Sold_html": self.sale_html,

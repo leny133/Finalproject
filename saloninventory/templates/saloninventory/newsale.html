@@ -33,19 +33,7 @@
     <select name="services" id="services"></select>
     <button id="serviceCart" class="btn btn-primary">Add To Cart</button>
   </div>
-  <div id="cartList">
-    <table id="Cart">
-      <tr>
-            <th>Product or Service</th>
-            <th>Price per oz/ml</th>
-            <th>Amount oz/ml</th>
-            <th>This Sale</th>
-      </tr>
-    </table>
-    <div><button id="emptycart" class="btn btn-danger" style="display: inline;">Empty Cart</button>  
-    {% csrf_token %}
-    <button id="placeOrder" class="btn btn-success" style="display: inline;">Place Order</button></div>
-  </div>
+  <div id="cartList"></div>
 
   {% block script %}
   <script

@@ -14,26 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#serviceCart")
     .addEventListener("click", () => addToCartS());
-  document.querySelector("#emptycart").addEventListener("click", () => {
-    sessionStorage.clear();
-    location.href = "/";
-  });
-  document.querySelector("#placeOrder").addEventListener("click", () => {
-    var r = confirm("Place Order?");
-    if (r == true) {
-      place_order();
-    } else {
-      location.href = "/newsale";
-    }
-    
-  });
-  document.querySelector("#Cart").style.display = "none";
-  document.querySelector("#emptycart").style.display = "none";
-  document.querySelector("#placeOrder").style.display = "none";
+  
+  
+  document.querySelector("#cartList").style.display = "none";
   cartP = JSON.parse(cartP);
   if (cartP != null) {
     loadCart();
-    document.querySelector("#Cart").style.display = "block";
+    document.querySelector("#cartList").style.display = "block";
     document.querySelector("#emptycart").style.display = "inline";
     document.querySelector("#placeOrder").style.display = "inline";
   }
@@ -188,6 +175,19 @@ function loadCart() {
   console.log(cartP);
   const isEmpty = Object.values(cartP).every((x) => x === null);
   console.log(isEmpty);
+  var y = document.createElement("table");
+  var tblhead = `
+    
+      <tr>
+            <th>Product or Service</th>
+            <th>Price per oz/ml</th>
+            <th>Amount oz/ml</th>
+            <th>This Sale</th>
+      </tr>
+      
+  `;
+  var tblbody="";
+  var tblbodyedt="";
   for (i = 0; i < cartP.length; i++) {
     if (isEmpty === true) {
       sessionStorage.clear();
@@ -196,43 +196,54 @@ function loadCart() {
       if (cartP[i] == undefined) {
       } else {
         var tbl = "";
-        var y = document.createElement("tr");
+        
         tbl = `
+            <tr>
             <td>${cartP[i].Product_Name} </td>
             <td> $${cartP[i].Price} </td>
             <td> ${cartP[i].Amount}</td>
             <td> $${(cartP[i].Price * cartP[i].Amount).toFixed(2)}</td>
+            
             `;
-        y.innerHTML =
+        var tbledt =
           tbl +
-          `<td> <button id="ed${cartP[i].pid}" name="${cartP[i].pid}"
-             onclick="edit(${i},)">
+          `<td> <button id="ed${cartP[i].pid}" name="${cartP[i].pid}" class="btn btn-warning"
+             onclick="edit(${i})">
             Edit
             </button></td>
             <td> <button id="del${cartP[i].pid}" name="${cartP[i].pid}" class="btn btn-danger"
              onclick="delete_entry(${i})">
             Remove
-            </button></td>
+            </button></td></tr>
           `;
-        document.getElementById("Cart").append(y);
-        tbl_html = tbl_html + tbl;
+          tblbodyedt = tblbodyedt + tbledt;
+          tblbody = tblbody + tbl +"</tr>"
         total_sale = parseFloat(cartP[i].Sale) + total_sale;
       }
     }
   }
-  y = document.createElement("tr");
-  tbl = `
-    
+  
+  var tbltotal = `
+          <tr>
             <td> </td>
             <td> </td>
             <td> Total: </td>
             <td id="total" name="${total_sale.toFixed(2 )}">
              $${total_sale.toFixed(2)}</td>
-    
+          </tr>
           `;
-  y.innerHTML = tbl;
-  tbl_html = tbl_html + tbl;
-  document.getElementById("Cart").append(y);
+  
+  tbl_html = tblhead + tblbody + tbltotal;
+  y.innerHTML = tblhead + tblbodyedt + tbltotal;
+  document.getElementById("cartList").append(y);
+  y = document.createElement("div")
+  y.innerHTML = `
+    <button id="emptycart" onclick="emptycart()" class="btn btn-danger" style="display: inline;">Empty Cart</button>  
+    
+    <button id="placeOrder" onclick="placeOrder()" class="btn btn-success" style="display: inline;">Place Order</button>
+  
+  `;
+  document.getElementById("cartList").append(y);
   console.log(tbl_html);
 }
 function edit(prod_id) {
@@ -253,4 +264,16 @@ function delete_entry(prod_id) {
   var jsonStr = JSON.stringify(cartP);
   sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
   location.href = "/newSale";
+}
+function emptycart(){
+  sessionStorage.clear();
+  location.href = "/";
+}
+function placeOrder(){
+  var r = confirm("Place Order?");
+  if (r == true) {
+    place_order();
+  } else {
+    location.href = "/newsale";
+  }
 }
