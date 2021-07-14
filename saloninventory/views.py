@@ -149,10 +149,12 @@ def newSale(request):
                 )
         for p in cartP :
             if p != None:
+                Pid = int(p.get("pid"))
                 if p.get("type")== "product":
-                    endsale.sold_products.add(int(p.get("pid")))
+                    endsale.sold_products.add(Pid)
+                    amount = float(p.get("Amount"))
                 elif p.get("type")== "service":
-                    endsale.sold_services.add(int(p.get("pid")))
+                    endsale.sold_services.add(Pid)
                     
                 
             
