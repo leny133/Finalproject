@@ -9,7 +9,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
-
+from decimal import *
 
 def index(request):
 
@@ -150,9 +150,14 @@ def newSale(request):
         for p in cartP :
             if p != None:
                 Pid = int(p.get("pid"))
+                amount = Decimal(p.get("Amount"))
                 if p.get("type")== "product":
                     endsale.sold_products.add(Pid)
-                    amount = float(p.get("Amount"))
+                    pupdate = Products.objects.filter(id=Pid)
+                    totalamount = pupdate[0].totalamount - amount
+                    pupdate.update(totalamount=totalamount)
+                    newunits = totalamount/(pupdate[0].amountperunit)
+                    pupdate.update(units=newunits)
                 elif p.get("type")== "service":
                     endsale.sold_services.add(Pid)
                     
