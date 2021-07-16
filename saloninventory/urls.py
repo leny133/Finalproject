@@ -17,6 +17,7 @@ urlpatterns = [
     path("myservices", views.Services_api, name = "Services_api"),
     path("mysales",views.Sales_api, name="sales"),
     path("newSale", views.newSale, name="newSale"),
+    path("<str:fllw>", views.Sales_pag, name="pagSales"),
     
 ]
  
