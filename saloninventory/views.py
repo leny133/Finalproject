@@ -15,7 +15,7 @@ def index(request):
 
     # Authenticated users view their inbox
     if request.user.is_authenticated:
-        return render(request, "saloninventory/index.html")
+        return Sales_pag(request)
 
     # Everyone else is prompted to sign in
     else:
@@ -89,9 +89,17 @@ def Services_api(request):
 
 @login_required
 def Sales_api(request):
-    my_sales = Sale.objects.filter(sales_person=request.user) 
+    my_sales = Sale.objects.filter(sales_person=request.user)
+    my_sales = my_sales.order_by("-timestamp").all()
     return JsonResponse([my_sale.serialize() for my_sale in my_sales], safe=False)
-
+@login_required
+def Sales_pag(request):
+    my_sales = Sale.objects.filter(sales_person=request.user)
+    my_sales = my_sales.order_by("-timestamp").all()
+    paginator = Paginator(my_sales, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, "saloninventory/index.html", {'page_obj': page_obj})
 
 @login_required
 def add_product(request):

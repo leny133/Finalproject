@@ -66,7 +66,11 @@ class Sale(models.Model):
             "Sold_products": [{"prodName":Products.product_name,
                                "prodImage": Products.image} for Products in self.sold_products.all()],
             "Sold_services": [Services.service_name for Services in self.sold_services.all()],
-            "Sale_date": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
+            "Sale_date": [{"day":self.timestamp.day,
+                           "month":self.timestamp.month,
+                           "year":self.timestamp.year,
+                           "date":self.timestamp.strftime("%B %d, %Y")#, %I:%M %p")
+                            }],
             "Total":self.total,
             "Sold_html": self.sale_html,
             

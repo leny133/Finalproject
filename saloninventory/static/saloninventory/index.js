@@ -11,7 +11,6 @@ async function load_cards() {
     throw new Error(message);
   }
   Sales = await response.json();
-  console.log(Sales)
   for(sale in Sales){
    var y = document.createElement("div");
    y.setAttribute("class", "card border-success mb-3");
@@ -24,10 +23,9 @@ async function load_cards() {
    document.getElementById("indexdiv").append(y)
    y = document.createElement("div");
    y.setAttribute("class","footer");
-   y.innerHTML=`${Sales[sale].Sale_date}`
-   
+   y.innerHTML=`${Sales[sale].Sale_date[0].date}`;
    document.getElementById(`card${sale}`).append(y)
-  
+   
   }
 }
   

@@ -13,7 +13,7 @@
 
 <div class="text-center">
   <blockquote class="blockquote">
-    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+    <p class="mb-0">{{page_obj.object_list.Sale}}</p>
   
   </blockquote>
   <figcaption class="blockquote-footer">
@@ -28,6 +28,8 @@
   <script
     type="text/javascript"
     src="{% static 'saloninventory/index.js' %}"
-  ></script>
+    
+  >
+  console.log({{page_obj}})</script>
   {% endblock %} {% endblock %}
 </html>
