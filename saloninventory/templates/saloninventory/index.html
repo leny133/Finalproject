@@ -15,11 +15,12 @@
     style="text-align: center; margin-left: auto; margin-right: auto"
   >
     <div class="text-center">
-      <figcaption class="blockquote-footer">
-        Someone famous in <cite title="Source Title">Source Title</cite>
+      <figcaption class="blockquote-header">
+        Sales of <cite title="Source Title">{{request.user.first_name}}</cite>
       </figcaption>
       <blockquote class="blockquote"></blockquote>
       {% for sale in page_obj.object_list %}
+      
       <div
         class="card border-success mb-3"
         style="
@@ -29,6 +30,7 @@
           margin-right: auto;
         "
       >
+      <div class="header">{{request.user.first_name}}.</div>
         <table>
           {{sale.Sold_html|safe}}
         </table>

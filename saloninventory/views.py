@@ -31,7 +31,7 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-
+        salonName = request.POST["salon_name"]
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
@@ -42,7 +42,7 @@ def register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password)
+            user = User.objects.create_user(username, email, password, first_name=salonName)
             user.save()
 
         except IntegrityError:
@@ -96,7 +96,7 @@ def Sales_api(request):
 def Sales_pag(request):
     my_sales = Sale.objects.filter(sales_person=request.user)
     my_sales = my_sales.order_by("-timestamp").all()
-    paginator = Paginator([my_sale.serialize() for my_sale in my_sales], 10)
+    paginator = Paginator([my_sale.serialize() for my_sale in my_sales], 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, "saloninventory/index.html", {'page_obj': page_obj})
