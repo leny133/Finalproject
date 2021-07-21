@@ -99,7 +99,6 @@ def Sales_pag(request):
     paginator = Paginator([my_sale.serialize() for my_sale in my_sales], 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    #print(page_obj.__dict__)
     return render(request, "saloninventory/index.html", {'page_obj': page_obj})
 
 @login_required

@@ -2,39 +2,80 @@
 <!DOCTYPE html>
 <html lang="en">
   {% block body %}
-    <style>
-    table, th, td {
+  <style>
+    table,
+    th,
+    td {
       border: 1px solid black;
     }
-    </style>
+  </style>
   <h2 style="text-align: center">{{ request.user.email }}</h2>
-  <div id="indexdiv" style="text-align: center; margin-left: auto;
-    margin-right: auto;">
-
-<div class="text-center">
-  <figcaption class="blockquote-footer">
-    Someone famous in <cite title="Source Title">Source Title</cite>
-  </figcaption>
-  <blockquote class="blockquote">
-    {% for sale in page_obj.object_list %}
-      <div class="card border-success mb-3" 
-                    style="max-width: 20rem; 
-                           text-align: center;
-                           margin-left: auto;
-                           margin-right: auto;">
-        <table>{{sale.Sold_html|safe}}</table>
+  <div
+    id="indexdiv"
+    style="text-align: center; margin-left: auto; margin-right: auto"
+  >
+    <div class="text-center">
+      <figcaption class="blockquote-footer">
+        Someone famous in <cite title="Source Title">Source Title</cite>
+      </figcaption>
+      <blockquote class="blockquote"></blockquote>
+      {% for sale in page_obj.object_list %}
+      <div
+        class="card border-success mb-3"
+        style="
+          max-width: 20rem;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      >
+        <table>
+          {{sale.Sold_html|safe}}
+        </table>
+        <div class="footer">
+          {%for date in sale.Sale_date%} {{date.date}}{% endfor %}
+        </div>
       </div>
-    {% endfor %}
-  </blockquote>
-  
-</div>
+      {% endfor %}
+    </div>
+    <div >
+            <ul class="pagination">
+                
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1" class="page-link">&laquo; </a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">&laquo; </a>
+                        
+                    </li>
+                    
 
-</div>
+                    {% endif %}
+                        <li class="page-item active">
+                            <a class="page-link" href="">{{ page_obj.number }}</a>
+                        </li>
+                    
+            
+                    {% if page_obj.has_next %}
+                    
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a>
+                    </li>
+                    {%else%}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a>
+                        </li>
+                        
+                    
+                    {% endif %}
+                
+            </ul>
+        </div>
+  </div>
 
-  
-  {% block script %}
-  <script
-    type="text/javascript"
-    src="{% static 'saloninventory/index.js' %}"></script>
-  {% endblock %} {% endblock %}
+  {% block script %} {% endblock %} {% endblock %}
 </html>
