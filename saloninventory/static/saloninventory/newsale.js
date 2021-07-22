@@ -84,6 +84,8 @@ function load_products(Products) {
     y.innerHTML = `${Products[product].Product_name}(${Products[product].Measure_type}) `;
     document.querySelector("#products").append(y);
   }
+  y = document.querySelector("#productAmount")
+  y.setAttribute("max",`${Products[0].Total_amount}`)
 }
 function load_services(services) {
   for (service in services) {
@@ -104,6 +106,15 @@ function showproduct() {
 function showservice() {
   document.querySelector("#cartproduct-view").style.display = "none";
   document.querySelector("#cartservice-view").style.display = "block";
+}
+function setMax(){
+  const prodId = document.querySelector("#products").value;
+  var selproduct = Products.filter(function(pmax){
+    return pmax.id == prodId
+  })
+  var y = document.querySelector("#productAmount");
+  y.setAttribute("max", `${selproduct[0].Total_amount}`);
+  console.log(selproduct[0].Total_amount)
 }
 function addToCartP() {
   const prodId = document.querySelector("#products").value;
@@ -127,13 +138,8 @@ function addToCartP() {
   } else {
     itemcount = parseInt(itemcount) + 1;
   }
-
-  console.log(itemcount);
-  console.log(cartproducts);
   cartP[itemcount] = cartproducts;
-  console.log(cartP);
   var jsonStr = JSON.stringify(cartP);
-
   sessionStorage.setItem(`${usr}itemcount`, itemcount);
   sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
   location.href = "/newSale";
@@ -176,6 +182,7 @@ function loadCart() {
   const isEmpty = Object.values(cartP).every((x) => x === null);
   console.log(isEmpty);
   var y = document.createElement("table");
+  y.style = "text-align: center; margin-left: auto; margin-right: auto";
   var tblhead = `
     
       <tr>
@@ -228,7 +235,7 @@ function loadCart() {
             <td> </td>
             <td> </td>
             <td> Total: </td>
-            <td id="total" name="${total_sale.toFixed(2 )}">
+            <td id="total" name="${total_sale.toFixed(2)}">
              $${total_sale.toFixed(2)}</td>
           </tr>
           `;
@@ -237,10 +244,10 @@ function loadCart() {
   y.innerHTML = tblhead + tblbodyedt + tbltotal;
   document.getElementById("cartList").append(y);
   y = document.createElement("div")
-  y.innerHTML = `
+  y.innerHTML = `<br>
     <button id="emptycart" onclick="emptycart()" class="btn btn-danger" style="display: inline;">Empty Cart</button>  
     
-    <button id="placeOrder" onclick="placeOrder()" class="btn btn-success" style="display: inline;">Place Order</button>
+    <button id="placeOrder" onclick="placeOrder()" class="btn btn-info" style="display: inline;">Place Order</button>
   
   `;
   document.getElementById("cartList").append(y);
@@ -270,7 +277,9 @@ function emptycart(){
   location.href = "/";
 }
 function placeOrder(){
-  var r = confirm("Place Order?");
+  var r = confirm(
+    `Place Order?`
+  );
   if (r == true) {
     place_order();
   } else {

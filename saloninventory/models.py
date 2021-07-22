@@ -28,6 +28,7 @@ class Products(models.Model):
             "Unit_price": self.unitprice,
             "Measure_type": self.measure,
             "Description": self.description,
+            "Total_amount":self.totalamount,
             "image": self.image,
 
         }
