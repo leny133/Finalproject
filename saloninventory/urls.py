@@ -12,6 +12,7 @@ urlpatterns = [
     path("addService", views.add_service, name="addService"),
     path("newsale",views.newSale, name="newSale"), 
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
+    path('inventory',views.inventory, name="inventory"),
     #API
     path("myproducts", views.Products_api, name = "products_api"),
     path("myservices", views.Services_api, name = "Services_api"),

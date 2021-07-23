@@ -12,15 +12,14 @@ from django.core.paginator import Paginator
 from decimal import *
 
 def index(request):
-
-    # Authenticated users view their inbox
     if request.user.is_authenticated:
         return Sales_pag(request)
 
-    # Everyone else is prompted to sign in
     else:
         return HttpResponseRedirect(reverse("login"))
 
+def inventory(request):
+    return render(request, "saloninventory/Inventory.html")
 
 def logout_view(request):
     logout(request)
