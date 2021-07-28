@@ -3,37 +3,47 @@
 <html lang="en">
   
   {% block body %}
-  This is The page.
-  <button id="showproduct" class="btn btn-primary">Add Product</button>
-    <button id="showservice" class="btn btn-secondary">Add Service</button><br>
-  <div id="cartproduct-view" style="display: block;">
+  <style>
+    table, th, td {
+      border: 4px solid rgb(83, 1, 66);
+    }
+    </style>
+    <div class="row">
+  <div
+        class="card border-success column"
+        style="
+          max-width: 40%;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+        ">
+    
+  <div id="cartproduct-view" class="header">
     
     <label for="products" style="text-align: center; margin: auto"><br>Select a product:<br></label>
-    <select name="products" id="products" class="btn btn-light" onchange="setMax()"></select><br>
-    <label for="productAmount" style="text-align: center; margin: auto">Amount of oz or ml</label>
-    <input
-      style="text-align: center; max-width: 40rem; margin: auto"
-      autofocus
-      min="1"
-      
-      class="form-control"
-      type="number"
-      id="productAmount"      
-    /><br>
+    <select name="products" id="products" class="btn btn-light"></select><br>
+  <div id="prodBody"></div>
+  <div id="pfoot" class="footer"></div>
+  </div></div>
+  <div
+        class="card border-success column"
+        style="
+          max-width: 40%;
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
+        ">
+  <div id="cartservice-view" class="header">
+    <label for="services" style="text-align: center; margin: auto"><br>Select a service:<br></label>
+    <select name="services" id="services" class="btn btn-light"></select><br>
     
-    <button id="productCart" class="btn btn-primary">Add To Cart</button>
-    
-  </div>
-  <div id="cartservice-view" style="display: none;">
-    <label for="services">Select a service:</label>
-    <select name="services" id="services" class="btn btn-light"></select>
-    <button id="serviceCart" class="btn btn-primary">Add To Cart</button>
+  </div></div></div>
+  
   </div>
   {% block script %}
-  
   <script
     type="text/javascript"
-    src="{% static 'saloninventory/newsale.js' %}"
+    src="{% static 'saloninventory/inventory.js' %}"
   ></script>
   {% endblock %} {% endblock %}
 </html>
