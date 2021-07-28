@@ -14,13 +14,13 @@
     id="indexdiv"
     style="text-align: center; margin-left: auto; margin-right: auto"
   >
-    <div class="text-center">
+    <div id="itemAmount" name = "{{page_items}}" class="text-center">
       <figcaption class="blockquote-header">
         Sales of <cite title="Source Title">{{request.user.first_name}}</cite>
       </figcaption>
       <blockquote class="blockquote"></blockquote>
       {% for sale in page_obj.object_list %}
-      
+
       <div
         class="card border-success mb-3"
         style="
@@ -30,7 +30,7 @@
           margin-right: auto;
         "
       >
-      <div class="header">{{request.user.first_name}}.</div>
+        <div class="header">{{request.user.first_name}}.</div>
         <table>
           {{sale.Sold_html|safe}}
         </table>
@@ -40,44 +40,61 @@
       </div>
       {% endfor %}
     </div>
-    <div >
-            <ul class="pagination">
-                
-                    {% if page_obj.has_previous %}
-                    <a href="?page=1" class="page-link">&laquo; </a>
-                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">&laquo; </a>
-                        
-                    </li>
-                    
+    <div>
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page=1" class="page-link">&laquo; </a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-link"
+          >Previous</a
+        >
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">&laquo; </a>
+        </li>
 
-                    {% endif %}
-                        <li class="page-item active">
-                            <a class="page-link" href="">{{ page_obj.number }}</a>
-                        </li>
-                    
-            
-                    {% if page_obj.has_next %}
-                    
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a>
-                    </li>
-                    {%else%}
-                        <li class="page-item disabled">
-                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a>
-                        </li>
-                        
-                    
-                    {% endif %}
-                
-            </ul>
-        </div>
+        {% endif %}
+        <li class="page-item active">
+          <a class="page-link" href="">{{ page_obj.number }}</a>
+        </li>
+
+        {% if page_obj.has_next %}
+
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+            >Next</a
+          >
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+            &raquo;</a
+          >
+        </li>
+        {%else%}
+        <li class="page-item disabled">
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+            &raquo;</a
+          >
+        </li>
+
+        {% endif %}
+      </ul>
+    </div>
   </div>
 
-  {% block script %} {% endblock %} {% endblock %}
+  {% block script %}
+  <script type="text/javascript">
+    var y = document.getElementById("itemAmount").getAttribute("name")
+    if(y=="0"){
+    alert(
+      "Welcome to the Salon App\n\n" +
+        "For this App to work you must do the following steps:\n"+
+        "\t• Step 1 : use Add Products or Add Services to your inventory \n" +
+        "\t• Step 2 : Go to New Sale and fill the cart and place order \n" +
+        "\t• Step 3(optional) : Modify products in My Inventory\n\n" 
+        
+    );}
+    
+  </script>
+
+  {% endblock %} {% endblock %}
 </html>

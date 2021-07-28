@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#serviceCart")
     .addEventListener("click", () => addToCartS());
-  
-  
   document.querySelector("#cartList").style.display = "none";
   cartP = JSON.parse(cartP);
   if (cartP != null) {

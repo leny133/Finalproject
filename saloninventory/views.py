@@ -98,7 +98,9 @@ def Sales_pag(request):
     paginator = Paginator([my_sale.serialize() for my_sale in my_sales], 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, "saloninventory/index.html", {'page_obj': page_obj})
+    page_items = len(page_obj)
+    return render(request, "saloninventory/index.html", {'page_obj': page_obj,
+                                                          'page_items':page_items})
 
 @login_required
 def add_product(request):
