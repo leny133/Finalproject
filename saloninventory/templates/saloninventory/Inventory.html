@@ -21,7 +21,7 @@
   <div id="cartproduct-view" class="header">
     
     <label for="products" style="text-align: center; margin: auto"><br>Select a product:<br></label>
-    <select name="products" id="products" class="btn btn-light"></select><br>
+    <select name="products" id="products" class="btn btn-light" onchange="pchange()"></select><br>
   <div id="prodBody"></div>
   <div id="pfoot" class="footer"></div>
   </div></div>
@@ -35,8 +35,9 @@
         ">
   <div id="cartservice-view" class="header">
     <label for="services" style="text-align: center; margin: auto"><br>Select a service:<br></label>
-    <select name="services" id="services" class="btn btn-light"></select><br>
-    
+    <select name="services" id="services" class="btn btn-light" onchange="schange()"></select><br>
+    <div id="servBody"></div>
+  <div id="sfoot" class="footer"></div>
   </div></div></div>
   
   </div>

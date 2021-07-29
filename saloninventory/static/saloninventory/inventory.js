@@ -1,20 +1,18 @@
 
-//var cartP = sessionStorage.getItem(`${usr}cartproducts`);
-
+var ProductsGlobal;
+var ServicesGlobal; 
 document.addEventListener("DOMContentLoaded", function () {
-  
-  
-  
-
-  fetch_products().then((Products) => {
-    load_products(Products);
-    load_card(Products,0, "p");
-    console.log(Products);
+   fetch_products().then((Products) => {
+    ProductsGlobal = Products;
+    load_products(ProductsGlobal);
+    load_card(ProductsGlobal,0, "p");
   });
   fetch_services().then((services) => {
-    load_services(services);
-    load_card(services,0, "s");
+    ServicesGlobal = services;
+    load_services(ServicesGlobal);
+    load_card(ServicesGlobal,0, "s");
   });
+   
 });
 
 
@@ -35,6 +33,7 @@ async function fetch_services() {
     throw new Error(message);
   }
   services = await response.json();
+  console.log(services)
   return services;
 }
 
@@ -88,4 +87,20 @@ function load_card(Item,pos,ps){
         ).toFixed(2)}
             `;
     }
+    if (ps == "s") {
+      document.getElementById("servBody").innerHTML = `
+            <h3><b>Service Name:</b> ${Item[pos].Product_name}</h3>
+            <b>Service Price:</b> <i>${Item[pos].Service_price}</i> 
+            <br><b>Description:</b> ${Item[pos].Service_description}
+            `;
+    }
+
+}
+function pchange(){
+    var position = document.querySelector("#products").value
+    load_card(ProductsGlobal,position,"p")
+}
+function schange(){
+    var position = document.querySelector("#products").value;
+    load_card(ServicesGlobal,position,"s")
 }
