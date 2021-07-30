@@ -33,7 +33,6 @@ async function fetch_services() {
     throw new Error(message);
   }
   services = await response.json();
-  console.log(services)
   return services;
 }
 
@@ -93,6 +92,7 @@ function load_card(Item,pos,ps){
             <b>Service Price:</b> <i>${Item[pos].Service_price}</i> 
             <br><b>Description:</b> ${Item[pos].Service_description}
             `;
+            
     }
 
 }
@@ -101,6 +101,6 @@ function pchange(){
     load_card(ProductsGlobal,position,"p")
 }
 function schange(){
-    var position = document.querySelector("#products").value;
+    var position = document.querySelector("#services").value;
     load_card(ServicesGlobal,position,"s")
 }
