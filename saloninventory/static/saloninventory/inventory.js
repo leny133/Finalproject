@@ -41,8 +41,6 @@ function load_products(Products) {
     y.setAttribute("id", `p${Products[product].id}`);
     y.setAttribute("name", `${Products[product].Product_name}`);
     y.setAttribute("units", `${Products[product].Units}`);
-    console.log(`${Products[product].Units}`);
-    alert(`${Products[product].Units}`);
     y.setAttribute(
       "price",
       `${(
@@ -80,8 +78,7 @@ function load_card(Item, pos, ps) {
             Price per <i>${Item[pos].Measure_type}</i> is $${(
       Item[pos].Unit_price / Item[pos].Amount_per_unit
     ).toFixed(2)}
-            `;
-        console.log(Item)        
+            `;        
     document.getElementById("pfoot").innerHTML = `
              <button class="btn btn-primary" onclick="editproduct(${Item[pos].id},'p')">Add Units</button>  
         `;
@@ -109,7 +106,7 @@ function schange() {
 function editproduct(pId,type){
     if(type=="p"){
         const Units = document.getElementById(`p${pId}`).getAttribute("units");
-        alert(Units)
+        
     }
     if(type=="s"){
         const Price = document
