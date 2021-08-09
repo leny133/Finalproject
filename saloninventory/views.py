@@ -175,3 +175,19 @@ def newSale(request):
         return render(request, "saloninventory/index.html")
     else:
         return render(request, "saloninventory/newsale.html")
+
+@csrf_exempt
+@login_required
+def addPUnits(request, prodId):        
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        print(data)
+    return HttpResponse(status=204)
+
+@csrf_exempt
+@login_required
+def addSPrice(request, servId):        
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        print(data.get("price"))
+    return HttpResponse(status=204)

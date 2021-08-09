@@ -19,6 +19,7 @@ urlpatterns = [
     path("mysales",views.Sales_api, name="sales"),
     path("newSale", views.newSale, name="newSale"),
     path("<str:fllw>", views.Sales_pag, name="pagSales"),
-    
+    path("updatep/<int:prodId>",views.addPUnits,name="addPUnits"),
+    path("updates/<int:servId>",views.addSPrice,name="addSPrice"),
 ]
  

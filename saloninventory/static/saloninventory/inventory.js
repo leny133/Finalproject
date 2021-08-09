@@ -105,14 +105,31 @@ function schange() {
 }
 function editproduct(pId,type){
     if(type=="p"){
-        const Units = document.getElementById(`p${pId}`).getAttribute("units");
-        
+        const Units = parseFloat(prompt("Enter price change", "0"));
+        const isInteger = /^[0-9.,]+$/;
+        if (isInteger.test(Units)) {
+        fetch(`/updatep/${pId}`,{
+          method: 'PUT',
+          body: JSON.stringify({
+              units: Units
+            })
+        })}else{
+          editproduct(pId,type)
+        }
     }
     if(type=="s"){
-        const Price = document
-          .getElementById(`s${pId}`)
-          .getAttribute("price");
-          
+        
+          var x = parseFloat(prompt("Enter price change", "0"));
+          const isInteger = /^[0-9.,]+$/;
+          if (isInteger.test(x)) {
+          fetch(`/updates/${pId}`,{
+            method: 'PUT',
+            body: JSON.stringify({
+                price: x
+              })
+          })}else{
+            editproduct(pId,type)
+          }  
     }
     
 }
