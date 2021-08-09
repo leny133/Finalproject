@@ -79,6 +79,7 @@ function load_products(Products) {
         Products[product].Unit_price / Products[product].Amount_per_unit
       ).toFixed(2)}`
     );
+    y.setAttribute("tamount", `${Products[product].Total_amount}`);
     y.innerHTML = `${Products[product].Product_name}(${Products[product].Measure_type}) `;
     document.querySelector("#products").append(y);
   }
@@ -117,31 +118,42 @@ function setMax(){
 function addToCartP() {
   const prodId = document.querySelector("#products").value;
   const prodPrice = document.getElementById(`p${prodId}`).getAttribute("price");
-  const prodAmount = document.getElementById("productAmount").value;
+  var prodAmount = document.getElementById("productAmount").value;
   const prodName = document.getElementById(`p${prodId}`).getAttribute("name");
   const tPSale = (prodPrice * prodAmount).toFixed(2);
-  var itemcount = sessionStorage.getItem(`${usr}itemcount`);
-  var cartproducts = {
-    type: "product",
-    pid: prodId,
-    Product_Name: prodName,
-    Price: prodPrice,
-    Amount: prodAmount,
-    Sale: tPSale,
-  };
+  var tamount = document.getElementById(`p${prodId}`).getAttribute("tamount");
+  prodAmount = parseInt(prodAmount)
+  tamount = parseInt(tamount)
+  if(tamount == 0){
+    document.getElementById("messageMax").innerHTML=`Error. There is 0 left of the selected product`;
+  }else if (prodAmount <= 0 || prodAmount>tamount) {
+    document.getElementById(
+      "messageMax"
+    ).innerHTML = `Error. You should only enter values between 1 and ${tamount}`;
+  }else {
+    var itemcount = sessionStorage.getItem(`${usr}itemcount`);
+    var cartproducts = {
+      type: "product",
+      pid: prodId,
+      Product_Name: prodName,
+      Price: prodPrice,
+      Amount: prodAmount,
+      Sale: tPSale,
+      Tamount: tamount,
+    };
 
-  if (cartP == null) {
-    cartP = [];
-    itemcount = 0;
-  } else {
-    itemcount = parseInt(itemcount) + 1;
-  }
-  cartP[itemcount] = cartproducts;
-  var jsonStr = JSON.stringify(cartP);
-  sessionStorage.setItem(`${usr}itemcount`, itemcount);
-  sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
-  location.href = "/newSale";
-}
+    if (cartP == null) {
+      cartP = [];
+      itemcount = 0;
+    } else {
+      itemcount = parseInt(itemcount) + 1;
+    }
+    cartP[itemcount] = cartproducts;
+    var jsonStr = JSON.stringify(cartP);
+    sessionStorage.setItem(`${usr}itemcount`, itemcount);
+    sessionStorage.setItem(`${usr}cartproducts`, jsonStr);
+    location.href = "/newSale";
+  }}
 function addToCartS() {
   const prodId = document.querySelector("#services").value;
   const prodPrice = document.getElementById(`s${prodId}`).getAttribute("price");
@@ -200,6 +212,7 @@ function loadCart() {
     } else {
       if (cartP[i] == undefined) {
       } else {
+        console.log(cartP)
         var tbl = "";
         
         tbl = `
