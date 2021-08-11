@@ -181,7 +181,9 @@ def newSale(request):
 def addPUnits(request, prodId):        
     if request.method == "PUT":
         data = json.loads(request.body)
-        print(data)
+        pupdate = Products.objects.filter(id=prodId)
+        print(pupdate[0].units)
+        print(data.get("units"))
     return HttpResponse(status=204)
 
 @csrf_exempt
