@@ -6,12 +6,14 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
 
 ## Requirements: 
 ### - Distinctiveness and Complexity:
+
     - The Salon Inventory app has its own api for the services and products data and is conditioned to the logged in user. Salon Inventory has a list of sales in the main page for the user and has the add products an services feature. This products and services can be modified by the user. The app has a shopping cart built in.
     - This project is far distinct from Project 4 and since it has a sales area, the main use is to keep track of the products amounts so the salon can re-stock its products in a timely manner.
     - This app is not an e-commerce app.
     - Salon Inventory is built in Django with a JavaScript front-end.
     - This app is mobile responsive.
 ### - Files:
+
     1. The saloncalc folder has all the files that Django creates automatically for a project, the only change I made was adding Salon Inventory and the admin app.
     2. Then created with Django cli the Salon Inventory app with the following parts:
         - templates/saloninventory:
