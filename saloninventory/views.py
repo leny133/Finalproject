@@ -186,9 +186,6 @@ def addPUnits(request, prodId):
         newAmount = pupdate[0].units + Decimal(data.get("units"))
         measureTotal = newAmount * pupdate[0].amountperunit
         pupdate.update(units=newAmount, totalamount=measureTotal)
-        print(pupdate[0].units)
-        print(Decimal(data.get("units")))
-        pupdate.update()
         HttpResponse(status=204)
     return render(request, "saloninventory/Inventory.html")
 
