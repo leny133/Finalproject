@@ -71,6 +71,7 @@ function load_card(Item, pos, ps) {
             There is ${Item[pos].Total_amount} <i>${
       Item[pos].Measure_type
     }</i> left of ${Item[pos].Product_name}<br>
+            Units left: ${Item[pos].Units}<br>
             Unit price: ${Item[pos].Unit_price}<br>
             Each unit has: ${Item[pos].Amount_per_unit} <i>${
       Item[pos].Measure_type

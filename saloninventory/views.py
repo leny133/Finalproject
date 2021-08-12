@@ -1,3 +1,4 @@
+import decimal
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -182,14 +183,21 @@ def addPUnits(request, prodId):
     if request.method == "PUT":
         data = json.loads(request.body)
         pupdate = Products.objects.filter(id=prodId)
+        newAmount = pupdate[0].units + Decimal(data.get("units"))
+        measureTotal = newAmount * pupdate[0].amountperunit
+        pupdate.update(units=newAmount, totalamount=measureTotal)
         print(pupdate[0].units)
-        print(data.get("units"))
-    return HttpResponse(status=204)
+        print(Decimal(data.get("units")))
+        pupdate.update()
+        HttpResponse(status=204)
+    return render(request, "saloninventory/Inventory.html")
 
 @csrf_exempt
 @login_required
 def addSPrice(request, servId):        
     if request.method == "PUT":
         data = json.loads(request.body)
-        print(data.get("price"))
+        newPrice = data.get("price")
+        supdate = Services.objects.filter(id=servId)
+        supdate.update(price=newPrice)
     return HttpResponse(status=204)
