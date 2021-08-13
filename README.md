@@ -115,3 +115,5 @@ This project is called Salon Inventory and its main purpose is to keep track of 
             
         }
      ```
+## Video
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/4HahPml1CIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
