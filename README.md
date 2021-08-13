@@ -5,12 +5,12 @@ CS50W Final project Capstone
 This proyect is called Salon Inventory and its main purpuse is to keep track of sales in a beauty Salon. With Salon Inventory you can add new products and services that are offer in the salon. You can keep track of sales with the new sale tab. The sales order tab includes a cart that lets you edit the price of the items to sell. In your main page you will have all the placed orders list ordered by the last sale first. Then you can go into your current inventory and add more units of each preduct or change existing services prices.
 
 ## Requirements: 
-### * Distinctiveness and Complexity:
-  * The Salon Inventory app has its own api for the services and products data and is conditioned to the logged in user. Salon Inventory has a list of sales in the main page for the user and has the add products an services feature. This products and services can be modified by the user. The app has a shopping cart built in.
-  * This project is far distinct from Project 4 and since it has a sales area, the main use is to keep track of the products amounts so the salon can re-stock its products in a timely manner.
-  * This app is not an e-commerce app.
-  * Salon Inventory is built in Django with a JavaScript front-end.
-  * This app is mobile responsive.
+  ### - Distinctiveness and Complexity:
+    * The Salon Inventory app has its own api for the services and products data and is conditioned to the logged in user. Salon Inventory has a list of sales in the main page for the user and has the add products an services feature. This products and services can be modified by the user. The app has a shopping cart built in.
+    * This project is far distinct from Project 4 and since it has a sales area, the main use is to keep track of the products amounts so the salon can re-stock its products in a timely manner.
+    * This app is not an e-commerce app.
+    * Salon Inventory is built in Django with a JavaScript front-end.
+    * This app is mobile responsive.
     
 ### * Files:
 
