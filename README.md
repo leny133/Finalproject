@@ -23,7 +23,7 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
         - Each table has its own way of serializing for better API understanding when returning json to front-end.
       3. views.py:
         - All back-end logic and functions are in this file.
-        - API will be documented here.
+        - API will be documented [here.](https://github.com/leny133/Finalproject/blob/main/README.md#api)
     - saloninventory/templates/saloninventory:
       1. layout.html:
         - This HTML file has all the tabs and css headers needed through all other HTML files and is included in all other HTML files.
@@ -69,12 +69,12 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
      -Password: admin
    5. If you register as a new user the app will alert you with a message when there is no order placed on how to get started. The message is:
         > alert(
-        > Welcome to the Salon App
-        > For this App to work you must do the following steps:
-        >   Step 1 : use Add Products or Add Services to your inventory
-        >   Step 2 : Go to New Sale and fill the cart and place order
-        >   Step 3(optional) : Modify products in My Inventory
-        >        )
+         Welcome to the Salon App
+         For this App to work you must do the following steps:
+           Step 1 : use Add Products or Add Services to your inventory
+           Step 2 : Go to New Sale and fill the cart and place order
+           Step 3(optional) : Modify products in My Inventory
+                )
       
 ## API
   - For this API to work you must be logged in with a vlid user of the app.
@@ -90,7 +90,8 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
      "Description": "description",
      "Total_amount": "total amount of oz",
      "image": "image url",
-    }```
+    }
+    ```
   - For a list of **services** you should fetch via GET `/myservices`. Services will be in json format. Example:
     ```json
     {
@@ -98,7 +99,8 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
      "Service_name": "service name",
      "Service_price": "price",
      "Service_description": "description",
-    }```
+    }
+    ```
   - For a list of **Placed Orders** you should fetch via GET `/mysales`. Sales will be in json format. Example:
     ```json
      {
@@ -114,4 +116,5 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
             "Total":"sale total",
             "Sold_html": "Table of the order formatted in HTML",
             
-        }```
+        }
+        ```
