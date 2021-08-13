@@ -87,7 +87,7 @@ function load_card(Item, pos, ps) {
   if (ps == "s") {
     document.getElementById("servBody").innerHTML = `
             <h3><b>Service Name:</b> ${Item[pos].Service_name}</h3>
-            <b>Service Price:</b> <i>${Item[pos].Service_price}</i> 
+            <b id = "priceChange">Service Price:</b> <i>$${Item[pos].Service_price}</i> 
             <br><b>Description:</b> ${Item[pos].Service_description}
             `;
             
@@ -104,17 +104,21 @@ function schange() {
   var position = document.querySelector("#services").value;
   load_card(ServicesGlobal, position, "s");
 }
-function editproduct(pId,type){
+async function editproduct(pId,type){
     if(type=="p"){
         const Units = parseFloat(prompt("Enter price change", "0"));
         const isInteger = /^[0-9.,]+$/;
         if (isInteger.test(Units)) {
-        fetch(`/updatep/${pId}`,{
+          const response = await fetch(`/updatep/${pId}`,{
           method: 'PUT',
           body: JSON.stringify({
               units: Units
             })
-        })}else{
+        })
+        if (response.ok) {
+          location.href = "/inventory"
+        }
+      }else{
           editproduct(pId,type)
         }
     }
@@ -123,14 +127,21 @@ function editproduct(pId,type){
           var x = parseFloat(prompt("Enter price change", "0"));
           const isInteger = /^[0-9.,]+$/;
           if (isInteger.test(x)) {
-          fetch(`/updates/${pId}`,{
+            const response = await fetch(`/updates/${pId}`,{
             method: 'PUT',
             body: JSON.stringify({
                 price: x
               })
-          })}else{
+          })
+          if (response.ok) {
+            location.href = "/inventory"
+          }
+        }else{
             editproduct(pId,type)
           }  
+          
     }
-    
+ 
 }
+    
+  

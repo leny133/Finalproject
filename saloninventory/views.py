@@ -151,7 +151,6 @@ def newSale(request):
         for p in cartP:
             if p != None:
                 total_S = total_S + float(p.get("Sale"))
-        print(total_S)
         endsale = Sale.objects.create(
                 sales_person=request.user,
                 total=total_S,
@@ -186,8 +185,7 @@ def addPUnits(request, prodId):
         newAmount = pupdate[0].units + Decimal(data.get("units"))
         measureTotal = newAmount * pupdate[0].amountperunit
         pupdate.update(units=newAmount, totalamount=measureTotal)
-        HttpResponse(status=204)
-    return render(request, "saloninventory/Inventory.html")
+    return render(request, "saloninventory/index.html")
 
 @csrf_exempt
 @login_required
@@ -197,4 +195,6 @@ def addSPrice(request, servId):
         newPrice = data.get("price")
         supdate = Services.objects.filter(id=servId)
         supdate.update(price=newPrice)
-    return HttpResponse(status=204)
+        return inventory(request)   
+    else:
+        return render(request, "saloninventory/index.html") 
