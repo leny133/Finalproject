@@ -70,7 +70,7 @@ class Sale(models.Model):
             "Sale_date": [{"day":self.timestamp.day,
                            "month":self.timestamp.month,
                            "year":self.timestamp.year,
-                           "date":self.timestamp.strftime("%B %d, %Y")#, %I:%M %p")
+                           "date":self.timestamp.strftime("%B %d, %Y")
                             }],
             "Total":self.total,
             "Sold_html": self.sale_html,

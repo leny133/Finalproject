@@ -78,7 +78,7 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
       
 ## API
   - For this API to work you must be logged in with a vlid user of the app.
-  - For a list of products you should fetch via GET `/myproducts`. Products will be in json format. Example:
+  - For a list of **products** you should fetch via GET `/myproducts`. Products will be in json format. Example:
     ```json
     {
      "id": "id",
@@ -89,6 +89,31 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
      "Measure_type": "measure",
      "Description": "description",
      "Total_amount": "total amount of oz",
-     "image": "image",
+     "image": "image url",
     }
    ```
+  - For a list of **services** you should fetch via GET `/myservices`. Services will be in json format. Example:
+    ```json
+    {
+     "Service_id": "id",
+     "Service_name": "service name",
+     "Service_price": "price",
+     "Service_description": "description",
+    }
+    ```
+  - For a list of **Placed Orders** you should fetch via GET `/mysales`. Sales will be in json format. Example:
+    ```json
+     {
+      "Sale_id": "id",
+      "Sold_products": [{"prodName":"Product name",
+                         "prodImage": "Products"}],
+      "Sold_services": ["Services"],
+      "Sale_date": [{"day":"day",
+                    "month":"month",
+                    "year":"year",
+                    "date":"date"
+                            }],
+            "Total":"sale total",
+            "Sold_html": "Table of the order formatted in HTML",
+            
+        }
