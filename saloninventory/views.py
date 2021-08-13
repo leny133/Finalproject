@@ -120,7 +120,7 @@ def add_product(request):
         )
 
         product.save()
-        return render(request, "saloninventory/index.html")
+        return Sales_pag(request)
     else:
         return render(request, "saloninventory/addproduct.html")
 
@@ -135,7 +135,7 @@ def add_service(request):
             description=request.POST["serviceDescription"]
         )
         service.save()
-        return render(request, "saloninventory/index.html")
+        return Sales_pag(request)
     else:
         return render(request, "saloninventory/services.html")
 
@@ -171,8 +171,7 @@ def newSale(request):
                     endsale.sold_services.add(Pid)
                     
                 
-            
-        return render(request, "saloninventory/index.html")
+        return Sales_pag(request)
     else:
         return render(request, "saloninventory/newsale.html")
 
@@ -185,7 +184,7 @@ def addPUnits(request, prodId):
         newAmount = pupdate[0].units + Decimal(data.get("units"))
         measureTotal = newAmount * pupdate[0].amountperunit
         pupdate.update(units=newAmount, totalamount=measureTotal)
-    return render(request, "saloninventory/index.html")
+    return Sales_pag(request)
 
 @csrf_exempt
 @login_required
@@ -197,4 +196,4 @@ def addSPrice(request, servId):
         supdate.update(price=newPrice)
         return inventory(request)   
     else:
-        return render(request, "saloninventory/index.html") 
+        return Sales_pag(request)
