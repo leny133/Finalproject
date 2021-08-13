@@ -48,9 +48,9 @@ This project is called Salon Inventory and its main purpose is to keep track of 
         - This html has all the needed parts of a sales cart that are responsive to a JavaScript file that will be further discussed later in this documentation.
       8. inventory.html:
         - This html has all the needed parts for a JavaScript file that updates the amount of units in products and the price of services.
-        - saloninventory/static/img:
-        1. favicon.ico:
-          - Icon image.
+    - saloninventory/static/img:
+      1. favicon.ico:
+        - Icon image.
     - saloninventory/static/saloninventory:
       1. newsale.js:
         - This JavaScript file has all the front-end part of the sales cart in newsale.html.
@@ -65,14 +65,14 @@ This project is called Salon Inventory and its main purpose is to keep track of 
   2. Clone this repo, in shell or powershell type in app's root path `python manage.py runserver`
   3. Open your browser and type `127.0.0.1:8000`
   4. For testing purposes you can use the following credentials:
-    -Username: leny
-    -Password: admin
+     -Username: leny
+     -Password: admin
   5. If you register as a new user the app will alert you with a message when there is no order placed on how to get started. The message is:
-    - Welcome to the Salon App
-    - For this App to work you must do the following steps:
-    - Step 1 : use Add Products or Add Services to your inventory
-    - Step 2 : Go to New Sale and fill the cart and place order
-    - Step 3(optional) : Modify products in My Inventory"
+     - Welcome to the Salon App
+     - For this App to work you must do the following steps:
+     - Step 1 : use Add Products or Add Services to your inventory
+     - Step 2 : Go to New Sale and fill the cart and place order
+     - Step 3(optional) : Modify products in My Inventory"
 ## API
   - For this API to work you must be logged in with a vlid user of the app.
   - For a list of **products** you should fetch via GET `/myproducts`. Products will be in json format. Example:
