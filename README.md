@@ -17,13 +17,13 @@ This project is called Salon Inventory and its main purpose is to keep track of 
   2. Then created with Django cli the Salon Inventory app with the following parts:
     - saloninventory/
       1. urls.py:
-        - This file has all the paths and the API urls.
+         - This file has all the paths and the API urls.
       2. models.py:
-        - In this file are all the tables needed in the database for the app to work.
-        - Each table has its own way of serializing for better API understanding when returning json to front-end.
+         - In this file are all the tables needed in the database for the app to work.
+         - Each table has its own way of serializing for better API understanding when returning json to front-end.
       3. views.py:
-        - All back-end logic and functions are in this file.
-        - API will be documented [here.](https://github.com/leny133/Finalproject/blob/main/README.md#api)
+         - All back-end logic and functions are in this file.
+         - API will be documented [here.](https://github.com/leny133/Finalproject/blob/main/README.md#api)
     - saloninventory/templates/saloninventory:
       1. layout.html:
         - This HTML file has all the tabs and css headers needed through all other HTML files and is included in all other HTML files.
@@ -65,8 +65,8 @@ This project is called Salon Inventory and its main purpose is to keep track of 
   2. Clone this repo, in shell or powershell type in app's root path `python manage.py runserver`
   3. Open your browser and type `127.0.0.1:8000`
   4. For testing purposes you can use the following credentials:
-     -Username: leny
-     -Password: admin
+     - Username: leny
+     - Password: admin
   5. If you register as a new user the app will alert you with a message when there is no order placed on how to get started. The message is:
      - Welcome to the Salon App
      - For this App to work you must do the following steps:
