@@ -92,6 +92,7 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
      "image": "image url",
     }
    ```
+
   - For a list of **services** you should fetch via GET `/myservices`. Services will be in json format. Example:
     ```json
     {
@@ -101,6 +102,7 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
      "Service_description": "description",
     }
     ```
+    
   - For a list of **Placed Orders** you should fetch via GET `/mysales`. Sales will be in json format. Example:
     ```json
      {
