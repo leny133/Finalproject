@@ -68,16 +68,14 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
      -Username: leny
      -Password: admin
    5. If you register as a new user the app will alert you with a message when there is no order placed on how to get started. The message is:
-     ```javascript
-        alert(
-        "Welcome to the Salon App\n\n" +
-        "For this App to work you must do the following steps:\n"+
-        "\t• Step 1 : use Add Products or Add Services to your inventory \n" +
-        "\t• Step 2 : Go to New Sale and fill the cart and place order \n" +
-        "\t• Step 3(optional) : Modify products in My Inventory\n\n" 
-        
-        )
-      ```
+        > alert(
+        > Welcome to the Salon App
+        > For this App to work you must do the following steps:
+        >   Step 1 : use Add Products or Add Services to your inventory
+        >   Step 2 : Go to New Sale and fill the cart and place order
+        >   Step 3(optional) : Modify products in My Inventory
+        >        )
+      
 ## API
   - For this API to work you must be logged in with a vlid user of the app.
   - For a list of products you should fetch via GET `/myproducts`. Products will be in json format. Example:
