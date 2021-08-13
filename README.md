@@ -23,7 +23,7 @@ This project is called Salon Inventory and its main purpose is to keep track of 
          - Each table has its own way of serializing for better API understanding when returning json to front-end.
       3. **views.py:**
          - All back-end logic and functions are in this file.
-         - API will be documented [here.](https://github.com/leny133/Finalproject/blob/main/README.md#api)
+         - API is documented [here.](https://github.com/leny133/Finalproject/blob/main/README.md#api)
     - saloninventory/templates/saloninventory:
       1. **layout.html:**
          - This HTML file has all the tabs and css headers needed through all other HTML files and is included in all other HTML files.
