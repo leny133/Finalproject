@@ -73,7 +73,7 @@ This project is called Salon Inventory and its main purpose is to keep track of 
      - Step 1 : use Add Products or Add Services to your inventory
      - Step 2 : Go to New Sale and fill the cart and place order
      - Step 3(optional) : Modify products in My Inventory"
-                )
+                
       
 ## API
   - For this API to work you must be logged in with a vlid user of the app.
