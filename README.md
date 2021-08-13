@@ -68,11 +68,11 @@ This project is called Salon Inventory and its main purpose is to keep track of 
      -Username: leny
      -Password: admin
    5. If you register as a new user the app will alert you with a message when there is no order placed on how to get started. The message is:
-     - "Welcome to the Salon App
-         For this App to work you must do the following steps:
-           Step 1 : use Add Products or Add Services to your inventory
-           Step 2 : Go to New Sale and fill the cart and place order
-           Step 3(optional) : Modify products in My Inventory"
+     - Welcome to the Salon App
+     - For this App to work you must do the following steps:
+     - Step 1 : use Add Products or Add Services to your inventory
+     - Step 2 : Go to New Sale and fill the cart and place order
+     - Step 3(optional) : Modify products in My Inventory"
                 )
       
 ## API
