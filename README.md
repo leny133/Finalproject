@@ -61,18 +61,18 @@ This project is called Salon Inventory and its main purpose is to keep track of 
         - There is a drop-down select that will change the product or service.
         - Each product or service can be updated in this code. Changes are made via PUT.
   ### How to run:
-   1. You must have Django 3.1.5 or later for this app to work
-   2. Clone this repo, in shell or powershell type in app's root path `python manage.py runserver`
-   3. Open your browser and type `127.0.0.1:8000`
-   4. For testing purposes you can use the following credentials:
-     -Username: leny
-     -Password: admin
-   5. If you register as a new user the app will alert you with a message when there is no order placed on how to get started. The message is:
-     - Welcome to the Salon App
-     - For this App to work you must do the following steps:
-     - Step 1 : use Add Products or Add Services to your inventory
-     - Step 2 : Go to New Sale and fill the cart and place order
-     - Step 3(optional) : Modify products in My Inventory"
+    1. You must have Django 3.1.5 or later for this app to work
+    2. Clone this repo, in shell or powershell type in app's root path `python manage.py runserver`
+    3. Open your browser and type `127.0.0.1:8000`
+    4. For testing purposes you can use the following credentials:
+      -Username: leny
+      -Password: admin
+    5. If you register as a new user the app will alert you with a message when there is no order placed on how to get started. The message is:
+      - Welcome to the Salon App
+      - For this App to work you must do the following steps:
+      - Step 1 : use Add Products or Add Services to your inventory
+      - Step 2 : Go to New Sale and fill the cart and place order
+      - Step 3(optional) : Modify products in My Inventory"
                 
       
 ## API
