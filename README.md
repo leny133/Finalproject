@@ -117,4 +117,4 @@ This proyect is called Salon Inventory and its main purpuse is to keep track of 
             "Sold_html": "Table of the order formatted in HTML",
             
         }
-        ```
+     ```
